@@ -1,0 +1,325 @@
+
+public class calculadora extends JFrame {
+    
+    //BOTOES
+//        private JButton mais,menos,dividir,multiplicar,igual;
+//        private JButton btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn0,btnPonto;
+        
+        private JButton numeros[];
+        private JButton operacoes[];
+
+        //TEXTOS
+        private JTextField texto1,texto2;
+        private String btnNome[] ={"1","2","3","4","5","6","7","8","9","0"};
+        private String nomeOperacoes[] = {"+","-","*","/","=",".","C","CE","Back space"};
+
+    //PAINEL
+        private JPanel painelTexto,painelOperacoes,painelBtn;
+    
+    //VARIAVEIS
+
+       boolean ponto=false;
+       int n1,n2,result,ordemOperacao=0,ordemCalculo=0;
+       double n3,n4,result2;
+    //LAYOUT
+        private BorderLayout layout1;
+   
+        public calculadora(){
+        super("Calculadora");
+           //layout
+                getContentPane().setLayout(new BorderLayout());
+           
+            //Painel
+                painelTexto = new JPanel(new BorderLayout());
+                     painelTexto.setBackground(Color.darkGray);
+                painelBtn = new JPanel(new GridLayout(2,3,2,2));
+                    painelBtn.setBackground(Color.DARK_GRAY);
+                painelOperacoes = new JPanel(new GridLayout(3,2,2,2));
+                    painelOperacoes.setBackground(Color.DARK_GRAY);
+                  
+            //botões números
+                numeros = new JButton[btnNome.length];
+                   for(int i=0; i < btnNome.length; i++){
+                        numeros[i]= new JButton(btnNome[i]);
+                        numeros[i].setBackground(Color.DARK_GRAY);
+                        numeros[i].setForeground(Color.WHITE);
+                            painelBtn.add(numeros[i]);
+                                getContentPane().add(painelBtn, BorderLayout.CENTER);
+                   }
+                
+             //botões operações
+                  operacoes = new JButton[nomeOperacoes.length];
+                       for(int i=0;i < nomeOperacoes.length; i++){
+                            operacoes[i] = new JButton(nomeOperacoes[i]);
+                            operacoes[i].setBackground(Color.DARK_GRAY);
+                            operacoes[i].setForeground(Color.WHITE);
+                            painelOperacoes.add(operacoes[i]);
+                                getContentPane().add(painelOperacoes, BorderLayout.PAGE_END);
+                        }
+            //Campo de texto
+               texto1 = new JTextField(11);
+               texto2 = new JTextField(11);
+        }
+    
+    public void init(){
+        //CONFIGURAÇÕES JANELA
+            setSize(500,600);
+            setVisible(true);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setLocationRelativeTo(null);
+//            setResizable(false);
+            
+        //ACRESCENTANDO O CAMPO DE TEXTO
+//            painelTexto.add(texto2, BorderLayout.BEFORE_FIRST_LINE);
+            painelTexto.add(texto1, BorderLayout.CENTER);
+            texto1.setEditable(false);
+//            texto2.setEditable(false);
+            texto1.setBackground(Color.DARK_GRAY);
+//            texto2.setBackground(Color.DARK_GRAY);
+                Font font = new Font("Roman", Font.BOLD, 20);
+            texto1.setFont(font);
+//            texto2.setFont(font);
+            texto1.setForeground(Color.WHITE);
+//            texto2.setForeground(Color.WHITE);
+                    getContentPane().add(painelTexto, BorderLayout.BEFORE_FIRST_LINE);
+                    
+       //ACRESCENTANDO BOTÕES NÚMEROS 
+           numeros[0].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+1);
+             
+                }
+            });
+            numeros[1].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+2);
+             
+                }
+            });
+             numeros[2].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+3);
+             
+                }
+            });
+               numeros[3].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+4);
+             
+                }
+            });
+              numeros[4].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+5);
+             
+                }
+            });
+                numeros[5].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+6);
+             
+                }
+            });
+                  numeros[6].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+7);
+             
+                }
+            });
+                    numeros[7].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+8);
+             
+                }
+            });
+                      numeros[8].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+9);
+             
+                }
+            });
+                        numeros[9].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 
+                    texto1.setText(texto1.getText()+0);
+             
+                }
+            });
+
+     
+                        //ACRESCENTANDO BOTÕES OPERAÇÕES
+       //MAIS                  
+      operacoes[0].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    ordemOperacao=1;
+                   if(ponto ==true){
+                        ordemCalculo=1;
+                      n3 =Double.parseDouble(texto1.getText());
+                      texto1.setText("");
+                      
+                   }else{
+                       ordemCalculo=2;
+                       n1 = Integer.parseInt(texto1.getText());
+                        texto1.setText("");
+                   }
+                }
+            });
+      //MENOS
+       operacoes[1].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                  ordemOperacao=2;
+                   if(ponto ==true){
+                        ordemCalculo=1;
+                      n3 =Double.parseDouble(texto1.getText());
+                      texto1.setText("");
+                      
+                   }else{
+                       ordemCalculo=2;
+                       n1 = Integer.parseInt(texto1.getText());
+                        texto1.setText("");
+                   }
+                }
+            });
+       //MULTIPLICAR
+       operacoes[2].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 ordemOperacao=3;
+                  if(ponto ==true){
+                        ordemCalculo=1;
+                      n3 =Double.parseDouble(texto1.getText());
+                      texto1.setText("");
+                      
+                   }else{
+                       ordemCalculo=2;
+                       n1 = Integer.parseInt(texto1.getText());
+                        texto1.setText("");
+                   }
+                }
+            });
+       //DIVIDIR
+       operacoes[3].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                  ordemOperacao=4;
+                   if(ponto ==true){
+                        ordemCalculo=1;
+                      n3 =Double.parseDouble(texto1.getText());
+                      texto1.setText("");
+                      
+                   }else{
+                       ordemCalculo=2;
+                       n1 = Integer.parseInt(texto1.getText());
+                        texto1.setText("");
+                   }
+                }
+            });
+       //IGUAL
+       operacoes[4].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                 if(ordemOperacao == 1){//MAIS
+                     if(ordemCalculo == 1){
+                         n4=Double.parseDouble(texto1.getText());
+                             result2 = n3+n4;
+                                 texto1.setText(String.valueOf(result2));
+                     }else if(ordemCalculo ==2){
+                         n2 = Integer.parseInt(texto1.getText());
+                            result = n1+n2;
+                             texto1.setText(String.valueOf(result));
+                     }
+                     
+                    }else if(ordemOperacao ==2){//MENOS
+                        if(ordemCalculo == 1){
+                         n4=Double.parseDouble(texto1.getText());
+                             result2 = n3-n4;
+                                 texto1.setText(String.valueOf(result2));
+                     }else if(ordemCalculo ==2){
+                         n2 = Integer.parseInt(texto1.getText());
+                            result = n1-n2;
+                             texto1.setText(String.valueOf(result));
+                     }
+                     
+                        }else if(ordemOperacao ==3){//MULTIPLICAR
+                                if(ordemCalculo == 1){
+                                    n4=Double.parseDouble(texto1.getText());
+                                        result2 = n3*n4;
+                                            texto1.setText(String.valueOf(result2));
+                                }else if(ordemCalculo ==2){
+                                    n2 = Integer.parseInt(texto1.getText());
+                                       result = n1*n2;
+                                        texto1.setText(String.valueOf(result));
+                                }
+                             } else if(ordemOperacao == 4){//DIVIDIR
+                                    if(ordemCalculo == 1){
+                                        n4=Double.parseDouble(texto1.getText());
+                                            result2 = n3/n4;
+                                                texto1.setText(String.valueOf(result2));
+                                    }else if(ordemCalculo ==2){
+                                        n2 = Integer.parseInt(texto1.getText());
+                                           result = n1/n2;
+                                            texto1.setText(String.valueOf(result));
+                                    }
+                             }
+                  
+                }
+            });
+       //PONTO
+       operacoes[5].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                  ponto=true;
+                  texto1.setText(texto1.getText()+".");
+                }
+            });
+       //C
+       operacoes[6].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                  texto1.setText("");
+                  texto2.setText("");
+                  repaint();
+                }
+            });
+       //CE
+        operacoes[7].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                  texto1.setText("");
+                  repaint();
+                }
+            });
+        //BACK SPACE
+         operacoes[8].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    if(texto1.getText().equals(texto1.getText()) != texto1.getText().isEmpty()){  
+                        String str = texto1.getText();
+                        StringBuilder w = new StringBuilder(str);
+                        str = String.valueOf(w.deleteCharAt(str.length()-1));
+                        texto1.setText(str);
+                     }
+                }
+            });
+         
