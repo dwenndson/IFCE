@@ -1,0 +1,31 @@
+from time import *
+import threading as kyu
+import random
+import _thread
+
+class Speedtrial(kyu.Thread):
+def __init__(self):
+kyu.Thread.__init__(self)
+def run(self):
+global tmp
+ini=time()
+for i in range(int(20000/nth)):
+a=random.randint(0,500)
+fim=time()
+if(tmp<fim – ini):
+tmp=fim – ini
+
+if __name__ == "__main__":
+sm=0
+nth=int(input("quantos threads?"))
+for wer in range(100):
+lis=[]
+for qw in range(nth):
+lis.append(Speedtrial())
+tmp=0
+for qw in range(nth):
+lis[qw].start()
+sleep(0.5)
+sm=sm+tmp
+print("tempo médio é:")
+print(sm/100)
