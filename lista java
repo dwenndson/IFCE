@@ -1,0 +1,49 @@
+package lista.tela;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.DefaultListModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JLabel;
+
+public class ListaTela extends JFrame{
+
+    private JList nomes;
+    private DefaultListModel nomesModel;
+    private DefaultListCellRenderer nomesRender;
+    
+    public ListaTela () {
+        super("Lista Nomes");
+        nomesRender = new DefaultListCellRenderer();
+        nomesModel = new DefaultListModel();
+        nomes = new JList(nomesModel);
+        nomes.setCellRenderer(nomesRender);
+    }
+    
+    public void init () {
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        
+        nomesModel.addElement(new String ("Manoel"));
+        nomesModel.addElement(new String ("Daniel"));
+        nomesModel.addElement(new String ("Odecília"));
+        nomesModel.addElement(new String ("Ronnison"));
+        
+        getContentPane().add(
+                nomes, 
+                BorderLayout.CENTER);
+        getContentPane().add(
+                new JLabel("Lista Nomes"), 
+                BorderLayout.NORTH);
+        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible (true);
+    }
+    
+    public static void main(String[] args) {
+        new ListaTela().init();
+    }
+    
+}
