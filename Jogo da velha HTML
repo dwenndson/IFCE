@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Jogo da Velha</title>
+        <style>
+            #tabuleiro {
+                width: 50%;
+                min-width: 30em !important;
+                height: 12em;
+                background-color: #eee;
+                margin: auto;
+                display: table;
+            }
+
+            .area {
+                border: 1px solid #000;
+                display: table-cell;
+                width: 33.33%;
+                vertical-align: middle;
+                text-align: center;
+                user-select: none;
+                font-size: 10em;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="tabuleiro">
+            <div id="a1" class="area" onclick="marcar(a1)"></div>
+            <div id="a2" class="area" onclick="marcar(a2)"></div>
+            <div id="a3" class="area" onclick="marcar(a3)"></div>
+        </div>
+        <div id="tabuleiro">
+            <div id="b1" class="area" onclick="marcar(b1)"></div>
+            <div id="b2" class="area" onclick="marcar(b2)"></div>
+            <div id="b3" class="area" onclick="marcar(b3)"></div>
+        </div>
+        <div id="tabuleiro">
+            <div id="c1" class="area" onclick="marcar(c1)"></div>
+            <div id="c2" class="area" onclick="marcar(c2)"></div>
+            <div id="c3" class="area" onclick="marcar(c3)"></div>
+        </div>
+
+        <script>
+            var valor = "O";
+            function marcar(area) {
+                if (area.innerHTML) 
+                    return;
+                area.innerHTML = valor;
+                if (valor === "O")
+                    valor = "X";
+                else
+                    valor = "O";
+                setTimeout(function () {
+                    verificarVitoria();
+                }, 0);
+            }
+            function verificarVitoria() {
+                var tabuleiro = [];
+                var vitoria = [
+                    [0, 1, 2],
+                    [3, 4, 5],
+                    [6, 7, 8],
+                    [0, 3, 6],
+                    [1, 4, 7],
+                    [2, 5, 8],
+                    [0, 4, 8],
+                    [2, 4, 6]
+                ]
+                for (var i = 1; i <= 3; i++) {
+                    tabuleiro.push(document.getElementById("a" + i).innerHTML);
+                    tabuleiro.push(document.getElementById("b" + i).innerHTML);
+                    tabuleiro.push(document.getElementById("c" + i).innerHTML);
+                }
+                for (var v = 0; v < 8; v++) {
+                    if (tabuleiro[vitoria[v][0]] && tabuleiro[vitoria[v][1]] && tabuleiro[vitoria[v][2]])
+                        if (tabuleiro[vitoria[v][0]] ===
+                            tabuleiro[vitoria[v][1]] &&
+                            tabuleiro[vitoria[v][1]] ===
+                            tabuleiro[vitoria[v][2]]) {
+                            alert("Ganhador: " + tabuleiro[vitoria[v][0]]);
+                        }
+                }
+            }
+        </script>
+
+    </body>
+
+</html>
